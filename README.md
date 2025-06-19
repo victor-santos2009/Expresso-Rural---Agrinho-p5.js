@@ -1,14 +1,6 @@
 🌾 Conexão Campo-Cidade 🏙️
 Um mini-jogo educativo desenvolvido para demonstrar de forma lúdica a jornada dos alimentos, desde a colheita no campo até a entrega nos centros urbanos.
 
-📜 Tabela de Conteúdos
-Sobre o Jogo
-Fases do Jogo
-Tecnologias Utilizadas
-Como Jogar Localmente
-Estrutura do Projeto
-Autor
-
 📖 Sobre o Jogo
 Conexão Campo-Cidade é um jogo de navegador dividido em três fases que simulam a cadeia de produção e distribuição de alimentos. O objetivo é educar os jogadores sobre as etapas que um produto agrícola percorre, valorizando o trabalho do produtor rural e a logística envolvida para que a comida chegue fresca à mesa das pessoas na cidade.
 
