@@ -1,0 +1,239 @@
+:root {
+    --primary-color: #4CAF50;
+    --secondary-color: #FFC107;
+    --accent-color: #2196F3;
+    --text-color: #333;
+    --bg-color: #F0F4F8;
+    --white: #FFFFFF;
+    --danger-color: #F44336;
+    --road-color: #78716c; /* Cor da estrada */
+    --grass-color: #86efac; /* Cor da grama */
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    text-align: center;
+    padding: 20px;
+}
+
+.game-container {
+    position: relative; 
+    width: 100%;
+    max-width: 900px;
+    background: var(--white);
+    border-radius: 20px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    padding: 30px;
+    overflow: hidden; 
+}
+
+.screen { display: none; }
+.screen.active { display: block; animation: fadeIn 0.5s ease; }
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+h1, h2 {
+    color: var(--primary-color);
+    margin-bottom: 15px;
+}
+
+p {
+    line-height: 1.6;
+    margin-bottom: 20px;
+}
+
+.button {
+    background: linear-gradient(45deg, var(--primary-color), #66BB6A);
+    color: var(--white);
+    border: none;
+    padding: 15px 30px;
+    font-size: 18px;
+    font-weight: 600;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(76, 175, 80, 0.4);
+    text-transform: uppercase;
+}
+
+.button:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 20px rgba(76, 175, 80, 0.5);
+}
+
+.game-stats {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    background: var(--bg-color);
+    padding: 15px;
+    border-radius: 12px;
+    margin-bottom: 20px;
+    font-size: 1.2rem;
+    font-weight: 600;
+}
+
+.game-stats > div {
+    color: var(--primary-color);
+    margin: 5px 10px;
+}
+
+.game-stats > div span {
+    color: var(--text-color);
+}
+
+.emoji-sprite {
+    display: inline-block;
+    font-size: 40px;
+    line-height: 1;
+    width: 40px;
+    height: 40px;
+    text-align: center;
+}
+
+#harvest-area {
+    position: relative;
+    width: 100%;
+    height: 40vh;
+    background: #a3d9a5 url('https://www.transparenttextures.com/patterns/fresh-snow.png');
+    border: 3px dashed var(--primary-color);
+    border-radius: 15px;
+    overflow: hidden;
+    cursor: pointer;
+}
+
+.harvest-item {
+    position: absolute;
+    transition: transform 0.2s ease, opacity 0.3s ease;
+    user-select: none;
+}
+
+.harvest-item.ripe:hover { transform: scale(1.15); }
+.harvest-item.unripe { filter: grayscale(80%) brightness(0.8); }
+.harvest-item.clicked { animation: collectAnimation 0.5s ease forwards; }
+
+@keyframes collectAnimation {
+    0% { transform: scale(1.1); }
+    100% { transform: scale(0); opacity: 0; }
+}
+
+#transport-canvas {
+    width: 100%;
+    height: 50vh;
+    background-color: var(--road-color); /* Estrada em tudo */
+    border-radius: 15px;
+    display: block;
+    cursor: none;
+}
+
+#delivery-screen-layout {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+#delivery-items-box {
+    background: var(--bg-color);
+    padding: 15px;
+    border-radius: 12px;
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    justify-content: center;
+    min-height: 60px;
+}
+
+.delivery-item {
+    cursor: grab;
+    transition: transform 0.2s;
+}
+
+.delivery-item:hover { transform: scale(1.2); }
+.delivery-item.dragging { opacity: 0.5; cursor: grabbing; }
+
+#delivery-targets {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 20px;
+}
+
+.delivery-target {
+    background: var(--white);
+    border: 3px dashed var(--accent-color);
+    border-radius: 15px;
+    padding: 20px;
+    transition: background-color 0.3s, border-style 0.3s;
+}
+
+.delivery-target.over {
+    background-color: #e3f2fd;
+    border-style: solid;
+}
+
+.delivery-target h3 {
+    margin-top: 0;
+    font-size: 1.5rem;
+    color: var(--accent-color);
+}
+
+.delivery-target p {
+    font-size: 2rem;
+    margin: 0;
+}
+
+#final-score {
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--primary-color);
+    margin: 20px 0;
+}
+
+#error-indicator {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(0.5);
+  font-size: 200px;
+  color: var(--danger-color);
+  opacity: 0;
+  pointer-events: none;
+  transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  z-index: 1000;
+  text-shadow: 2px 2px 8px rgba(0,0,0,0.3);
+}
+
+#error-indicator.show {
+  opacity: 1;
+  transform: translate(-50%, -50%) scale(1);
+}
+
+@media (max-width: 600px) {
+    .button {
+        padding: 12px 24px;
+        font-size: 16px;
+    }
+
+    .delivery-target p {
+        font-size: 1.8rem;
+    }
+    .emoji-sprite {
+      font-size: 32px;
+      width: 32px;
+      height: 32px;
+    }
+}

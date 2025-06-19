@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Conexão Campo-Cidade</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <div class="game-container">
+        <div id="error-indicator">❌</div>
+
+        <div id="start-screen" class="screen active">
+            <h1>🌾 Conexão Campo-Cidade 🏙️</h1>
+            <p>A jornada completa do alimento, da colheita à sua mesa.</p>
+            <h2>Como Jogar</h2>
+            <p><strong>Fase 1 (Colheita):</strong> Clique nos alimentos para coletá-los. Cuidado com os itens cinzas!</p>
+            <p><strong>Fase 2 (Transporte):</strong> Use as setas ▲ ▼ ou as teclas W/S para desviar dos obstáculos.</p>
+            <p><strong>Fase 3 (Entrega):</strong> Arraste cada item para o local correto antes que o tempo acabe!</p>
+            <button id="start-button" class="button">Começar a Jogar</button>
+        </div>
+
+        <div id="harvest-screen" class="screen">
+            <h2>Fase 1: Colheita Rápida!</h2>
+            <div class="game-stats">
+                <div id="harvest-score">Pontos: <span>0</span></div>
+                <div id="harvest-timer">Tempo: <span>30</span>s</div>
+            </div>
+            <div id="harvest-area"></div>
+        </div>
+        
+        <div id="transport-screen" class="screen">
+            <h2>Fase 2: Estrada para a Cidade</h2>
+            <div class="game-stats">
+                <div id="transport-time">Tempo Restante: <span>45</span>s</div>
+                <div id="transport-score">Pontos: <span>0</span></div>
+            </div>
+            <canvas id="transport-canvas"></canvas>
+        </div>
+
+        <div id="delivery-screen" class="screen">
+            <h2>Fase 3: Hora da Entrega!</h2>
+            <div class="game-stats">
+                <div id="delivery-score">Pontos: <span>0</span></div>
+                <div id="delivery-timer">Tempo: <span>60</span>s</div>
+            </div>
+            <p>Arraste os alimentos da sua cesta para os locais corretos na cidade.</p>
+            <div id="delivery-screen-layout">
+                <div id="delivery-items-box"></div>
+                <div id="delivery-targets">
+                    <div class="delivery-target" data-accepts="fruta"><h3>🏫 Escola</h3><p>🍎🍓🍇</p></div>
+                    <div class="delivery-target" data-accepts="legume"><h3>🛒 Mercado</h3><p>🥕🥦🍅</p></div>
+                    <div class="delivery-target" data-accepts="especial"><h3>👨‍🍳 Restaurante</h3><p>🌶️🌽🥒</p></div>
+                    <div class="delivery-target" data-accepts="unripe"><h3>👨‍🌾 Peq. Agricultor</h3><p>🍏🥬</p></div>
+                </div>
+            </div>
+        </div>
+
+        <div id="transition-screen" class="screen">
+            <h2 id="transition-title"></h2>
+            <p id="transition-message"></p>
+            <button id="next-phase-button" class="button">Continuar</button>
+        </div>
+
+        <div id="end-screen" class="screen">
+            <h2>Jornada Concluída!</h2>
+            <p>Você completou a conexão entre o campo e a cidade!</p>
+            <p id="final-score">Pontuação Final: 0</p>
+            <button id="restart-button" class="button">Jogar Novamente</button>
+        </div>
+    </div>
+
+    <script src="sketch.js" defer></script>
+</body>
+</html>
